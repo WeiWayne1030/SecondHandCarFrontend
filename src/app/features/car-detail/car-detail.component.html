@@ -1,0 +1,58 @@
+<div class="detail-container" *ngIf="car">
+    <div class="car-header p-d-flex p-ai-center p-mb-4">
+        <p-button label="返回列表" icon="pi pi-arrow-left" [link]="true" routerLink="/"></p-button>
+        <h1 class="p-m-0">{{car.name}}</h1>
+        <p-tag [value]="car.status" severity="info" class="p-ml-3"></p-tag>
+    </div>
+
+    <div class="p-grid detail-grid">
+        <div class="p-col-12 p-md-8">
+            <p-galleria [value]="car.images" [responsiveOptions]="responsiveOptions"
+                [containerStyle]="{'max-width': '100%'}" [numVisible]="5">
+                <ng-template pTemplate="item" let-item>
+                    <img [src]="item.itemImageSrc" [alt]="item.alt || car.name"
+                        style="width: 100%; display: block; border-radius: 12px; height: 450px; object-fit: cover;" />
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="p-grid p-nogutter p-justify-center">
+                        <img [src]="item.thumbnailImageSrc" [alt]="'縮圖: ' + (item.alt || car.name)"
+                            style="display: block; width: 60px; height: 40px; object-fit: cover; border-radius: 4px;" />
+                    </div>
+                </ng-template>
+            </p-galleria>
+        </div>
+
+        <div class="p-col-12 p-md-4">
+            <p-card class="info-sidebar-card shadow-1">
+                <div class="price-tag">${{car.price | number}}</div>
+                <p-divider></p-divider>
+                <div class="quick-info">
+                    <div class="info-item"><span>年份</span><strong>{{car.year}}</strong></div>
+                    <div class="info-item"><span>里程</span><strong>{{car.mileage | number}} km</strong></div>
+                    <div class="info-item"><span>位置</span><strong>{{car.location}}</strong></div>
+                </div>
+                <p-divider></p-divider>
+                <p-button label="立即預約看車" icon="pi pi-calendar" styleClass="w-full p-mb-2"></p-button>
+                <p-button label="加入收藏" icon="pi pi-heart" styleClass="p-button-outlined w-full"></p-button>
+            </p-card>
+        </div>
+    </div>
+
+    <div class="p-mt-5">
+        <p-tabView>
+            <p-tabPanel header="車輛說明">
+                <p class="description-content">{{car.description}}</p>
+            </p-tabPanel>
+            <p-tabPanel header="詳細規格">
+                <div class="p-grid spec-details">
+                    <div class="p-col-6 p-md-4"><span>驅動方式</span> <strong>{{car.specs.engine}}</strong></div>
+                    <div class="p-col-6 p-md-4"><span>變速系統</span> <strong>{{car.specs.transmission}}</strong></div>
+                    <div class="p-col-6 p-md-4"><span>外觀顏色</span> <strong>{{car.specs.color}}</strong></div>
+                    <div class="p-col-6 p-md-4"><span>驅動類型</span> <strong>{{car.specs.driveType}}</strong></div>
+                    <div class="p-col-6 p-md-4"><span>電池容量</span> <strong>{{car.specs.battery}}</strong></div>
+                    <div class="p-col-6 p-md-4"><span>續航里程</span> <strong>{{car.specs.range}}</strong></div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

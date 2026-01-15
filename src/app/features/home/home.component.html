@@ -1,0 +1,34 @@
+<div class="home-container">
+    <div class="hero-section">
+        <h1>尋找您的理想座駕</h1>
+        <p>提供最優質的二手車交易平台，安全、透明、迅速。</p>
+    </div>
+
+    <div class="filter-section">
+        <div class="search-box">
+            <input type="text" placeholder="搜尋喜愛的車型..." aria-label="車型搜尋輸入框">
+            <button class="search-btn">搜尋</button>
+        </div>
+    </div>
+
+    <div class="car-grid">
+        <div class="car-card" *ngFor="let car of cars">
+            <div class="car-image">
+                <img [src]="car.imageUrl" [alt]="car.name">
+                <span class="status-badge">{{car.status}}</span>
+            </div>
+            <div class="car-info">
+                <h3>{{car.name}}</h3>
+                <p class="car-details">
+                    <span>{{car.year}}年</span> |
+                    <span>{{car.mileage | number}} km</span> |
+                    <span>{{car.location}}</span>
+                </p>
+                <div class="car-footer">
+                    <span class="car-price">${{car.price | number}}</span>
+                    <button class="detail-btn" [routerLink]="['/car', car.id]">查看詳情</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+.detail-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.car-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.car-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #2d3436;
+}
+
+.detail-grid {
+    margin-top: 2rem;
+}
+
+.price-tag {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #e17055;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f2f6;
+}
+
+.info-item span {
+    color: #636e72;
+}
+
+.info-item strong {
+    color: #2d3436;
+}
+
+.description-content {
+    line-height: 1.8;
+    color: #2d3436;
+    font-size: 1.1rem;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.spec-details div {
+    padding: 15px;
+    border-bottom: 1px solid #f1f2f6;
+}
+
+.spec-details span {
+    color: #636e72;
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.spec-details strong {
+    font-size: 1.1rem;
+    color: #2d3436;
+}
+
+:host ::ng-deep .p-card-body {
+    padding: 2rem;
+}
+
+:host ::ng-deep .p-tabview-panels {
+    padding: 2rem 0;
+}
+
+.w-full {
+    width: 100%;
+}
