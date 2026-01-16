@@ -132,8 +132,16 @@
     color: #e17055;
 }
 
+/* CTA Buttons Container */
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 60%;
+}
+
 .detail-btn {
-    padding: 8px 18px;
+    padding: 8px 12px;
     background: transparent;
     border: 1px solid #0984e3;
     color: #0984e3;
@@ -141,9 +149,43 @@
     cursor: pointer;
     font-weight: 500;
     transition: all 0.3s;
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 .detail-btn:hover {
     background: #0984e3;
     color: white;
+}
+
+/* Trust Badge */
+.trust-badge {
+    margin-top: 60px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #636e72;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .car-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .cta-buttons {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .detail-btn {
+        flex: 1;
+    }
 }

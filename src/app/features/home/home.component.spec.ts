@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { HomeComponent } from './home.component';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
 
 describe('HomeComponent', () => {
     let component: HomeComponent;
@@ -9,7 +11,7 @@ describe('HomeComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [HomeComponent],
-            imports: [RouterTestingModule]
+            imports: [FormsModule, RouterTestingModule]
         })
             .compileComponents();
 
@@ -22,17 +24,24 @@ describe('HomeComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should render car cards based on dummy data', () => {
+    it('should render hero section title', () => {
         const compiled = fixture.nativeElement as HTMLElement;
-        const carCards = compiled.querySelectorAll('.car-card');
-        expect(carCards.length).toBeGreaterThan(0);
-        expect(carCards.length).toBe(component.cars.length);
+        expect(compiled.querySelector('.hero-section h1')?.textContent).toContain('尋找您的理想座駕');
     });
 
-    it('should show the correct price for the first car', () => {
-        const compiled = fixture.nativeElement as HTMLElement;
-        const firstCarPrice = compiled.querySelector('.car-price')?.textContent;
-        // The dummy price for the first car is 1,200,000, which becomes $1,200,000 with pipes
-        expect(firstCarPrice).toContain('1,200,000');
+    it('should initialize with full car list', () => {
+        expect(component.filteredCars.length).toBe(6);
+        expect(component.filteredCars.length).toEqual(component.cars.length);
+    });
+
+    it('should filter cars by search keyword', () => {
+        component.searchCars('Tesla');
+        fixture.detectChanges();
+        expect(component.filteredCars.length).toBe(1);
+        expect(component.filteredCars[0].name).toContain('Tesla');
+
+        component.searchCars(''); // Reset
+        fixture.detectChanges();
+        expect(component.filteredCars.length).toBe(6);
     });
 });

@@ -70,8 +70,41 @@ export class HomeComponent implements OnInit {
         }
     ];
 
+    // Search keyword bound to input
+    searchKeyword: string = '';
+    // List displayed after filtering
+    filteredCars: Car[] = [];
+
     constructor() { }
 
     ngOnInit(): void {
+        // Initialize filtered list
+        this.filteredCars = this.cars;
+    }
+
+    // Filter cars based on search keyword
+    searchCars(keyword: string): void {
+        const kw = keyword?.trim().toLowerCase();
+        if (!kw) {
+            this.filteredCars = this.cars;
+            return;
+        }
+        this.filteredCars = this.cars.filter(car =>
+            car.name.toLowerCase().includes(kw) ||
+            car.status.toLowerCase().includes(kw) ||
+            car.location.toLowerCase().includes(kw)
+        );
+    }
+
+    // Placeholder for reservation action
+    reserveCar(car: Car): void {
+        // TODO: integrate reservation flow
+        console.log('Reserve car', car.id);
+    }
+
+    // Placeholder for adding to favorites
+    addToFavorites(car: Car): void {
+        // TODO: integrate favorite logic
+        console.log('Add to favorites', car.id);
     }
 }

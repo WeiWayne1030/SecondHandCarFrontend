@@ -3,16 +3,15 @@
         <h1>尋找您的理想座駕</h1>
         <p>提供最優質的二手車交易平台，安全、透明、迅速。</p>
     </div>
-
     <div class="filter-section">
         <div class="search-box">
-            <input type="text" placeholder="搜尋喜愛的車型..." aria-label="車型搜尋輸入框">
-            <button class="search-btn">搜尋</button>
+            <input type="text" placeholder="搜尋喜愛的車型..." aria-label="車型搜尋輸入框" [(ngModel)]="searchKeyword" />
+            <button class="search-btn" (click)="searchCars(searchKeyword)">搜尋</button>
         </div>
     </div>
 
     <div class="car-grid">
-        <div class="car-card" *ngFor="let car of cars">
+        <div class="car-card" *ngFor="let car of filteredCars">
             <div class="car-image">
                 <img [src]="car.imageUrl" [alt]="car.name">
                 <span class="status-badge">{{car.status}}</span>
@@ -26,9 +25,19 @@
                 </p>
                 <div class="car-footer">
                     <span class="car-price">${{car.price | number}}</span>
-                    <button class="detail-btn" [routerLink]="['/car', car.id]">查看詳情</button>
+                    <div class="cta-buttons">
+                        <button class="detail-btn" [routerLink]="['/car', car.id]"
+                            [attr.aria-label]="'查看 ' + car.name + ' 的詳情'">查看詳情</button>
+                        <button class="detail-btn" (click)="reserveCar(car)"
+                            [attr.aria-label]="'預約看車 ' + car.name">立即預約看車</button>
+                        <button class="detail-btn" (click)="addToFavorites(car)"
+                            [attr.aria-label]="'加入收藏 ' + car.name">加入收藏</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="trust-badge" style="margin-top:40px; text-align:center; font-size:0.9rem; color:#555;">
+        平台信任資訊：人工審核標示
     </div>
 </div>
