@@ -17,6 +17,7 @@ import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,11 @@ import { TagModule } from 'primeng/tag';
     CardModule,
     TabViewModule,
     DividerModule,
-    TagModule
+    TagModule,
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.DEBUG,
+      serverLogLevel: NgxLoggerLevel.ERROR
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
