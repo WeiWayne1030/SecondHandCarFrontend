@@ -1,18 +1,28 @@
 <div class="login-container">
     <div class="login-card">
         <h2>會員登入</h2>
-        <form (submit)="onSubmit()">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="email">電子郵件</label>
-                <input type="email" id="email" [(ngModel)]="loginData.email" name="email" required
-                    placeholder="example@mail.com" aria-required="true">
+                <label for="username">帳號</label>
+                <input type="text" id="username" formControlName="username" required
+                    placeholder="請輸入 buyer, seller, 或 admin">
             </div>
+            <div *ngIf="showUsernameError" class="alert alert-danger">
+                <div *ngIf="f['username'].errors?.['required']">帳號為必填欄位</div>
+            </div>
+
             <div class="form-group">
                 <label for="password">密碼</label>
-                <input type="password" id="password" [(ngModel)]="loginData.password" name="password" required
-                    placeholder="請輸入密碼" aria-required="true">
+                <input type="password" id="password" formControlName="password" required
+                    placeholder="密碼是 'password'">
             </div>
-            <button type="submit" class="login-btn">登入</button>
+            <div *ngIf="showPasswordError" class="alert alert-danger">
+                <div *ngIf="f['password'].errors?.['required']">密碼為必填欄位</div>
+            </div>
+
+            <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+            <button type="submit" class="login-btn" [disabled]="loginForm.invalid">登入</button>
         </form>
         <p class="switch-link">還沒有帳號？ <a href="#">立即註冊</a></p>
     </div>

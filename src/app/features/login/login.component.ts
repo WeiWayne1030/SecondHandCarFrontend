@@ -1,43 +1,67 @@
-import { Component } from '@angular/core';
-import { RouteStateService } from '../../core/service/route-state.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../core/service/authentication.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-    loginData = {
-        email: '',
-        password: ''
-    };
+export class LoginComponent implements OnInit {
+    loginForm!: FormGroup;
+    error?: string;
 
-    constructor(private route: ActivatedRoute, private routeStateService: RouteStateService) {
+    constructor(
+        private formBuilder: FormBuilder,
+        private router: Router,
+        private authService: AuthenticationService
+    ) {
+        // 如果已經登入，直接跳轉到首頁
+        if (this.authService.currentUserValue) {
+            this.router.navigate(['/']);
+        }
+    }
+
+    ngOnInit(): void {
+        this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
+    }
+
+    get f() { return this.loginForm.controls; }
+
+    get showUsernameError() {
+        const control = this.f['username'];
+        return control.invalid && (control.dirty || control.touched);
+    }
+
+    get showPasswordError() {
+        const control = this.f['password'];
+        return control.invalid && (control.dirty || control.touched);
     }
 
     onSubmit() {
-        console.log('Login submitted:', this.loginData);
-        alert('登入成功 (Dummy Login)');
-        const url = this.getRedirectUrl();
-        const routeData = this.getRouteData(url);
-        this.routeStateService.navigateTo(url, routeData);
-    }
+        // 如果表單無效，則停止
+        if (this.loginForm.invalid) {
+            return;
+        }
 
-    private getQueryParams(): Params {
-        const paramsObj = this.route.snapshot.queryParams;
-        return paramsObj;
-    }
+        this.error = undefined;
+        const { username, password } = this.loginForm.value;
 
-    private getRedirectUrl(): string {
-        const redirectUrl = this.getQueryParams()['redirectPath'] ?? '/';
-        return redirectUrl;
-    }
-
-    private getRouteData(url: string): any {
-        const stateData = this.routeStateService.state?.data;
-        const storageData = this.routeStateService.getRouteData(url)?.data;
-        const routeData = stateData ?? storageData ?? {};
-        return routeData;
+        this.authService.login(username, password)
+            .pipe()
+            .subscribe(user => {
+                if (user) {
+                    // 登入成功，導航到首頁
+                    this.router.navigate(['/']);
+                    alert('登入成功');
+                } else {
+                    // 登入失敗，顯示錯誤訊息
+                    this.error = '帳號或密碼錯誤';
+                }
+            });
     }
 }

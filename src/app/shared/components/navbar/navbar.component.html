@@ -36,12 +36,21 @@
             </svg>
         </div>
 
-        <!-- Login/Logout Icon -->
-        <div class="nav-icon" title="Login / Logout" routerLink="/login" aria-label="登入或登出" tabindex="0">
+        <!-- Login Icon (when logged out) -->
+        <div *ngIf="!(isLoggedIn$ | async)" class="nav-icon" title="登入" routerLink="/login" aria-label="登入" tabindex="0">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                 aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg>
+        </div>
+
+        <!-- Logout Icon (when logged in) -->
+        <div *ngIf="isLoggedIn$ | async" class="nav-icon" title="登出" (click)="logout()" aria-label="登出" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
         </div>
     </div>
