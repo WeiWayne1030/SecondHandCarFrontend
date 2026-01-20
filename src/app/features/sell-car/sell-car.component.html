@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <h2>刊登您的二手車</h2>
+  <form [formGroup]="sellCarForm" (ngSubmit)="onSubmit()">
+    <!-- Brand -->
+    <div class="mb-3">
+      <label for="brand" class="form-label">品牌</label>
+      <input type="text" class="form-control" id="brand" formControlName="brand" placeholder="例如：Toyota">
+      <div *ngIf="sellCarForm.get('brand')?.invalid && sellCarForm.get('brand')?.touched" class="text-danger mt-1">
+        品牌為必填欄位。
+      </div>
+    </div>
+
+    <!-- Model -->
+    <div class="mb-3">
+      <label for="model" class="form-label">車型</label>
+      <input type="text" class="form-control" id="model" formControlName="model" placeholder="例如：Corolla">
+      <div *ngIf="sellCarForm.get('model')?.invalid && sellCarForm.get('model')?.touched" class="text-danger mt-1">
+        車型為必填欄位。
+      </div>
+    </div>
+
+    <!-- Year -->
+    <div class="mb-3">
+      <label for="year" class="form-label">年份</label>
+      <input type="number" class="form-control" id="year" formControlName="year" placeholder="例如：2018">
+      <div *ngIf="sellCarForm.get('year')?.invalid && sellCarForm.get('year')?.touched" class="text-danger mt-1">
+        請輸入有效的年份。
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="mb-3">
+      <label for="price" class="form-label">價格 (TWD)</label>
+      <input type="number" class="form-control" id="price" formControlName="price" placeholder="例如：350000">
+      <div *ngIf="sellCarForm.get('price')?.invalid && sellCarForm.get('price')?.touched" class="text-danger mt-1">
+        請輸入有效的價格。
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">描述</label>
+      <textarea class="form-control" id="description" formControlName="description" rows="5" placeholder="輸入車輛詳細描述..."></textarea>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">上傳圖片</label>
+      <input type="file" class="form-control" id="image" formControlName="image" multiple accept="image/*">
+      <small class="form-text text-muted">目前僅為佔位符，實際圖片上傳功能需後續實作。</small>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!sellCarForm.valid">刊登車輛</button>
+  </form>
+</div>

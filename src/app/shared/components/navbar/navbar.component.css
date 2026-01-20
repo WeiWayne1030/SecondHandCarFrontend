@@ -1,71 +1,58 @@
-.navbar {
+:host ::ng-deep .p-toolbar.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 1rem 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: #2457e2;
+  border: none;
+
   position: sticky;
   top: 0;
   z-index: 1000;
+
   font-family: 'Inter', sans-serif;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* left */
+.navbar-left {
+  display: flex;
+  align-items: center;
 }
 
 .navbar-left .logo {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #2d3436;
+  color: #ffffff;
   text-decoration: none;
-  cursor: pointer;
-  transition: color 0.3s ease;
 }
 
-.navbar-left .logo:hover {
-  color: #0984e3;
-}
-
+/* right */
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
-.nav-icon {
+/* icon link */
+.nav-icon-link {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #636e72;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
   transition: all 0.3s ease;
-  padding: 8px;
-  border-radius: 50%;
 }
 
-.nav-icon:hover {
-  background-color: #f1f2f6;
-  color: #0984e3;
+.nav-icon-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
-.nav-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  background-color: #f1f2f6;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  margin-right: 1rem;
-}
-
-.search-bar input {
-  border: none;
-  background: none;
-  outline: none;
-  padding-left: 0.5rem;
-  font-size: 0.9rem;
-  width: 150px;
+.nav-icon-label {
+  font-size: 0.75rem;
+  margin-top: 4px;
 }
