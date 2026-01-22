@@ -1,5 +1,5 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="!isAnimationRoute"></app-navbar>
 
-<main class="main-container">
+<main [class.main-container]="!isAnimationRoute" [class.fullscreen]="isAnimationRoute">
   <router-outlet></router-outlet>
 </main>

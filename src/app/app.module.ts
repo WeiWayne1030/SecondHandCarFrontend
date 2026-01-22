@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { CarDetailComponent } from './features/car-detail/car-detail.component';
+import { CarAnimationComponent } from './features/animation/car-animation.component';
 
 // PrimeNG Modules
 import { ButtonModule } from 'primeng/button';
@@ -24,7 +25,8 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    CarDetailComponent
+    CarDetailComponent,
+    CarAnimationComponent
   ],
   imports: [
     BrowserModule,
